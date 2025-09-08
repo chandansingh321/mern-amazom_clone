@@ -32,7 +32,7 @@ const Signup = () => {
     console.log(data)
     
     try {
-      const response = await fetch("http://44.226.145.213/api/auth/Signup", {
+      const response = await fetch("http://44.226.145.213:5000/api/auth/Signup", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
