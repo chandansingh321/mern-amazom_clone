@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaSearch, FaMapMarkerAlt, FaShoppingCart, FaBars } from 'react-icons/fa';
 import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { cardcount } from  "../api/cart"
 
 const Header = () => {
   const [showAccountList, setShowAccountList] = useState(false);
   const navigate = useNavigate(); // Initialize navigate
   const [searchTerm, setSearchTerm] = useState('');
+  const [count, setcount] = useState(0);
 
-
+  const userdata=localStorage.getItem("user")
+  const username = JSON.parse(userdata)?.userData?.name
+  const firstname = username?.split(' ')[0];
+  if (userdata) {
+    cardcount()
+      .then(data => {
+        setcount(data.count)
+        // You can now use `data` to update state, UI, etc.
+      })
+      .catch(error => {
+        console.error("Failed to fetch cart count:", error);
+      });
+  }
+  
   //logout funtion
   const logout =()=>{
     localStorage.clear();
   }
-  const userdata=localStorage.getItem("user")
-  const username = JSON.parse(userdata)?.userData?.name
-  const firstname = username?.split(' ')[0];
+  
 
 
   
@@ -33,7 +46,7 @@ const Header = () => {
       <div className="flex items-center px-4 py-2">
         {/* Logo */}
         <div className="flex items-center mr-4">
-          <div className="text-2xl font-bold text-white mr-1">amazon</div>
+          <div className="text-1.75xl font-bold text-white mr-1">amazon clone</div>
           <span className="text-xs italic font-light">.in</span>
         </div>
 
@@ -60,7 +73,7 @@ const Header = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="flex-grow px-4 py-2 text-black focus:outline-none"
-              placeholder="Search Amazon.in"
+              placeholder="Search Amazon clone.in"
             />
             <button onClick={handleSearch} className="bg-[#FEBD69] text-black px-4 rounded-r-md hover:bg-[#F3A847]">
               <FaSearch />
@@ -172,7 +185,7 @@ const Header = () => {
           <div className="relative">
             <FaShoppingCart className="text-2xl" />
             <span className="absolute -top-2 -right-2 bg-[#F3A847] text-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-              0
+              {count}
             </span>
           </div>
           <span className="ml-1 text-sm font-bold">Cart</span>
