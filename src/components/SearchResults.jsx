@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-
+const apiUrl = process.env.REACT_APP_API_URL
 const SearchResults = () => {
   const location = useLocation();
   const [products, setProducts] = useState([]);
@@ -11,7 +11,7 @@ const SearchResults = () => {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/products/search?q=${query}`);
+        const response = await fetch(`${apiUrl}/products/search?q=${query}`);
         const data = await response.json();
         setProducts(data.data);
       } catch (error) {

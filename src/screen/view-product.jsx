@@ -4,6 +4,7 @@ import { FaHeart, FaStar, FaRegStar } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
 import { addToCart } from '../api/cart';
 import {getUserData} from '../commonfuntion/getuserdata'
+const apiUrl = process.env.REACT_APP_API_URL
 
 const ViewProductPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
@@ -19,7 +20,7 @@ const ViewProductPage = () => {
 
   const fetchProduct = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/products/productone/${id}`);
+      const response = await fetch(`${apiUrl}/products/productone/${id}`);
       
       if (!response.ok) {
         const errorData = await response.json();

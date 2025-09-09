@@ -3,6 +3,7 @@ import { FiMail, FiArrowLeft } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+const apiUrl = process.env.REACT_APP_API_URL
 
 const ForgotPasswordPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);

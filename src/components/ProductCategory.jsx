@@ -2,7 +2,7 @@ import { useState,useEffect } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-
+const apiUrl = process.env.REACT_APP_API_URL
 const HomePage = () => {
   const [wishlist, setWishlist] = useState([]);
 const [categoriesData,setCategoriesData]=useState([])
@@ -11,7 +11,7 @@ const [categoriesData,setCategoriesData]=useState([])
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/categories/category`, {
+        const response = await fetch(`${apiUrl}/categories/category`, {
           method: "GET",
           headers: {
             'Content-Type': 'application/json'

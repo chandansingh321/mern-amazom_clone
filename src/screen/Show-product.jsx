@@ -1,5 +1,6 @@
 import { useState,useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+const apiUrl = process.env.REACT_APP_API_URL
 
 const ProductCard = ({ product }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -34,7 +35,7 @@ const ProductsGrid = () => {
   const { id } = useParams();
   const fetchProduct = async (id) => {
       try {
-        const response = await fetch(`http://localhost:5000/api/products/product/${id}`);
+        const response = await fetch(`${apiUrl}/products/product/${id}`);
         
         if (!response.ok) {
           const errorData = await response.json();

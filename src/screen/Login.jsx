@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+const apiUrl = process.env.REACT_APP_API_URL
 
 // Yup validation schema
 const schema = yup.object().shape({
@@ -30,7 +31,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch(`${apiUrl}/auth/login`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'

@@ -1,3 +1,4 @@
+const apiUrl = process.env.REACT_APP_API_URL
 export const addToCart = async (data) => {
   try {
     const tokenData = localStorage.getItem("user");
@@ -18,7 +19,7 @@ export const addToCart = async (data) => {
       }
     }
     
-    const response = await fetch("http://localhost:5000/api/cart/addtocart", {
+    const response = await fetch(`${apiUrl}/cart/addtocart`, {
       method: "POST",
       headers: headers,
       body: JSON.stringify(data)

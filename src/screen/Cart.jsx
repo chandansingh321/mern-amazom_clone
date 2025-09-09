@@ -2,11 +2,12 @@ import { useState, useEffect, useMemo } from 'react';
 import { FiShoppingCart, FiTrash2, FiPlus, FiMinus } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { getUserData } from '../commonfuntion/getuserdata';
-
+const apiUrl = process.env.REACT_APP_API_URL
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const id = getUserData()?.id;
+const apiUrl = process.env.REACT_APP_API_URL
   
 
   const tokenData = localStorage.getItem("user");
@@ -24,7 +25,7 @@ const CartPage = () => {
 
   const   fetchCartData = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/cart/cart/${id}`, {
+      const response = await fetch(`${apiUrl}/cart/cart/${id}`, {
         method: "GET",
         headers: headers
       });
@@ -80,7 +81,7 @@ const CartPage = () => {
     console.log('Removing item:', itemId);
   
     try {
-      const response = await fetch(`http://localhost:5000/api/cart/delete/${itemId}`, {
+      const response = await fetch(`${apiUrl}/cart/delete/${itemId}`, {
         method: "DELETE",
         headers: headers
       });
